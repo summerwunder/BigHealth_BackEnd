@@ -21,12 +21,5 @@ mybatis-plus:
     db-config:
       logic-delete-field: isDeleted  #全局逻辑删除
       id-type: auto #主键策略自增长
-      table-prefix: t_ # 设置表的前缀
+
   #pagehelper分页插件配置
-  #pagehelper:
-  #  helperDialect: mysql
-  # reasonable: true
-  #supportMethodsArguments: true
-  #params: count=countSql
-  #configuration:
-  #  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -1,7 +1,11 @@
 package edu.whut.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
+import edu.whut.mapper.UserMapper;
 import edu.whut.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
 * @author wunder
@@ -10,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
+    public IPage<User> getAllUsers
+            (int page, int size,String username,Object gender, String phone);
 }

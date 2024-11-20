@@ -73,6 +73,11 @@ public class User implements Serializable {
     @TableField(value = "update_time")
     private Date updateTime;
 
+    @TableField(value = "phone")
+    private String phone;
+
+    @TableField(value = "id_card")
+    private String idCard;
     @Version
     private Integer version; // 乐观锁版本号
 

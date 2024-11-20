@@ -16,12 +16,14 @@
             <result property="address" column="address" jdbcType="VARCHAR"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
             <result property="version" column="version" jdbcType="INTEGER"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,nickname,real_name,
         gender,birthday,points,
         is_member,is_recommender,address,
-        update_time
+        update_time,version,phone,id_card
     </sql>
 </mapper>
