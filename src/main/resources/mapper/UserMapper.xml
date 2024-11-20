@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.whut.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="edu.whut.pojo.User">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+            <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+            <result property="gender" column="gender" jdbcType="OTHER"/>
+            <result property="birthday" column="birthday" jdbcType="DATE"/>
+            <result property="points" column="points" jdbcType="INTEGER"/>
+            <result property="isMember" column="is_member" jdbcType="TINYINT"/>
+            <result property="isRecommender" column="is_recommender" jdbcType="TINYINT"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="version" column="version" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,nickname,real_name,
+        gender,birthday,points,
+        is_member,is_recommender,address,
+        update_time
+    </sql>
+</mapper>
