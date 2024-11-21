@@ -4,14 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.whut.dto.CheckUserAddDTO;
 import edu.whut.dto.CheckUserDTO;
 import edu.whut.pojo.CheckUser;
 import edu.whut.pojo.User;
 import edu.whut.service.CheckUserService;
 import edu.whut.mapper.CheckUserMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -70,6 +73,19 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
 
         dto.setCheckCount(0); // 默认体检次数为 0，可根据业务逻辑调整
         return dto;
+    }
+
+    /**
+     * 新增体检人
+     * @param checkUserDTO 前端传递的 DTO
+     * @return 是否新增成功
+     */
+    public boolean addCheckUser(CheckUserAddDTO checkUserDTO) {
+        CheckUser checkUser = new CheckUser();
+        BeanUtils.copyProperties(checkUserDTO, checkUser); // DTO 转实体类
+        checkUser.setCreateTime(new Date());
+        checkUser.setUpdateTime(new Date());
+        return checkUserMapper.insert(checkUser) > 0;
     }
 }
 

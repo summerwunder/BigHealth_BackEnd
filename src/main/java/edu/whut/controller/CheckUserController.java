@@ -1,14 +1,12 @@
 package edu.whut.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import edu.whut.dto.CheckUserAddDTO;
 import edu.whut.dto.CheckUserDTO;
 import edu.whut.response.Result;
 import edu.whut.service.CheckUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/checkUser")
@@ -35,5 +33,20 @@ public class CheckUserController {
 
         IPage<CheckUserDTO> checkUserList = checkUserService.getCheckUserList(page, size, name, gender, phone);
         return Result.success(checkUserList);
+    }
+
+    /**
+     * 新增体检人
+     * @param checkUserDTO 前端传递的数据
+     * @return 操作结果
+     */
+    @PostMapping("/add")
+    public Result addCheckUser(@RequestBody CheckUserAddDTO checkUserDTO) {
+        boolean success = checkUserService.addCheckUser(checkUserDTO);
+        if (success) {
+            return Result.success("新增成功");
+        } else {
+            return Result.error("添加失败");
+        }
     }
 }
