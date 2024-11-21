@@ -1,5 +1,7 @@
 package edu.whut.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import edu.whut.dto.CheckUserDTO;
 import edu.whut.pojo.CheckUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CheckUserService extends IService<CheckUser> {
 
+    public IPage<CheckUserDTO> getCheckUserList(int page, int size, String name, String gender, String phone);
 }
