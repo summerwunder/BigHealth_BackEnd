@@ -1,5 +1,7 @@
 package edu.whut.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,6 +12,7 @@ import edu.whut.pojo.CheckUser;
 import edu.whut.pojo.User;
 import edu.whut.service.CheckUserService;
 import edu.whut.mapper.CheckUserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 * @createDate 2024-11-21 15:22:25
 */
 @Service
+@Slf4j
 public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser>
     implements CheckUserService{
     @Autowired
@@ -95,6 +99,22 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
         }
         // 使用逻辑删除
         return checkUserMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public boolean updateCheckUser(CheckUserAddDTO user, Integer id) {
+        CheckUser checkUser = checkUserMapper.selectById(id);
+        if(ObjectUtil.isNotNull(checkUser)){
+            // 拷贝属性到现有用户对象
+            checkUser.setName(user.getName());
+            checkUser.setGender(user.getGender());
+            checkUser.setPhone(user.getPhone());
+            checkUser.setIdCard(user.getIdCard());
+            checkUser.setUpdateTime(new Date());
+            log.info("{}",checkUser);
+            return checkUserMapper.updateById(checkUser) > 0;
+        }
+        return false;
     }
 }
 

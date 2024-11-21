@@ -3,6 +3,7 @@ package edu.whut.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import edu.whut.dto.CheckUserAddDTO;
 import edu.whut.dto.CheckUserDTO;
+import edu.whut.dto.UserDTO;
 import edu.whut.response.Result;
 import edu.whut.service.CheckUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,20 @@ public class CheckUserController {
             return Result.success("删除成功");
         } else {
             return Result.error("删除失败，体检人不存在");
+        }
+    }
+
+    @PostMapping("/update")
+    public Result updateUser(@RequestBody CheckUserAddDTO user, @RequestParam Integer id) {
+        try {
+            boolean isUpdated = checkUserService.updateCheckUser(user,id);
+            if (isUpdated) {
+                return Result.success("用户信息更新成功");
+            } else {
+                return Result.error("更新失败，用户可能不存在");
+            }
+        } catch (Exception e) {
+            return Result.error("更新失败: " + e.getMessage());
         }
     }
 }

@@ -18,4 +18,6 @@ public interface CheckUserService extends IService<CheckUser> {
     public boolean addCheckUser(CheckUserAddDTO checkUserDTO);
 
     public boolean deleteCheckUser(Integer id);
+
+    public boolean updateCheckUser(CheckUserAddDTO user, Integer id);
 }
