@@ -87,6 +87,15 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
         checkUser.setUpdateTime(new Date());
         return checkUserMapper.insert(checkUser) > 0;
     }
+
+    public boolean deleteCheckUser(Integer id) {
+        CheckUser existingUser = checkUserMapper.selectById(id);
+        if (existingUser == null) {
+            return false; // 用户不存在
+        }
+        // 使用逻辑删除
+        return checkUserMapper.deleteById(id) > 0;
+    }
 }
 
 

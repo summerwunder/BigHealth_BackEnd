@@ -49,4 +49,13 @@ public class CheckUserController {
             return Result.error("添加失败");
         }
     }
+    @DeleteMapping("/delete/{id}")
+    public Result deleteCheckUser(@PathVariable Integer id) {
+        boolean success = checkUserService.deleteCheckUser(id);
+        if (success) {
+            return Result.success("删除成功");
+        } else {
+            return Result.error("删除失败，体检人不存在");
+        }
+    }
 }
