@@ -3,6 +3,8 @@ package edu.whut.pojo;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 
@@ -41,7 +43,7 @@ public class User implements Serializable {
      * 生日
      */
     @TableField(value = "birthday")
-    private Date birthday;
+    private LocalDate birthday;
 
     /**
      * 积分
@@ -71,7 +73,7 @@ public class User implements Serializable {
      * 更新时间
      */
     @TableField(value = "update_time")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @TableField(value = "phone")
     private String phone;

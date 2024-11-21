@@ -19,6 +19,7 @@ mybatis-plus:
   type-aliases-package: edu.whut.pojo
   global-config:
     db-config:
+      version-field: version # 乐观锁字段
       logic-delete-field: isDeleted  #全局逻辑删除
       id-type: auto #主键策略自增长
 

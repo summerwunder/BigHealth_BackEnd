@@ -2,6 +2,7 @@ package edu.whut.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
+import edu.whut.dto.UserDTO;
 import edu.whut.mapper.UserMapper;
 import edu.whut.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -16,4 +17,10 @@ public interface UserService extends IService<User> {
 
     public IPage<User> getAllUsers
             (int page, int size,String username,Object gender, String phone);
+
+    public boolean addUser(UserDTO userDTO);
+
+    public User searchUser(Integer id);
+
+    public boolean updateUser(UserDTO user,Integer id);
 }
