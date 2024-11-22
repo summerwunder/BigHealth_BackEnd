@@ -27,6 +27,12 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     @Override
     public PageResult<OrdersVO> getOrderList(int page, int size, String name, String gender, String phone, String date) {
         Page<OrdersVO> orderPage = new Page<>(page, size);
+        date = date.split("T")[0];
+        // 获取最后一位字符并加1
+        char lastChar = date.charAt(date.length() - 1);
+        int incrementedChar = Character.getNumericValue(lastChar) + 1;
+        // 拼接字符串
+        date = date.substring(0, date.length() - 1) + incrementedChar;
 
         // 查询三表联查结果
         List<OrdersVO> orders = orderMapper.getOrderList(orderPage, name, gender, phone, date);

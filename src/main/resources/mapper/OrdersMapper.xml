@@ -64,7 +64,7 @@
             AND u.phone LIKE CONCAT('%', #{phone}, '%')
         </if>
         <if test="date != null and date != ''">
-            AND DATE(d.order_time) = #{date}
+            AND DATE_FORMAT(d.order_time, '%Y-%m-%d') = #{date}
         </if>
     </select>
 

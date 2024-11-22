@@ -32,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 构造查询条件
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         if (username != null && !username.isEmpty()) {
-            queryWrapper.like(User::getNickname, username); // 模糊查询
+            queryWrapper.like(User::getRealName, username); // 模糊查询
         }
         if (gender != null && ObjectUtil.isNotEmpty(gender)) {
             queryWrapper.eq(User::getGender, gender); // 精确匹配
