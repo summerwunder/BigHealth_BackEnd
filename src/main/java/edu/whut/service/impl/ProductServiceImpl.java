@@ -5,12 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.whut.dto.ProductDTO;
 import edu.whut.pojo.Product;
 import edu.whut.pojo.User;
 import edu.whut.service.ProductService;
 import edu.whut.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
 * @author wunder
@@ -41,6 +45,44 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
 
         // 分页查询
         return productMapper.selectPage(userPage, queryWrapper);
+    }
+
+    public boolean addProduct(ProductDTO productDTO) {
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        product.setType(productDTO.getType());
+        product.setPrice(productDTO.getPrice());
+        product.setDescription(productDTO.getDescription());
+        product.setDetails(productDTO.getDetails());
+        product.setIsListed(productDTO.getIsListed());
+        product.setIsRecommended(productDTO.getIsRecommended());
+        product.setUpdateTime(new Date());
+        product.setIsDeleted(0); // 默认未删除
+        product.setVersion(0); // 乐观锁版本初始为0
+        return productMapper.insert(product) > 0;
+    }
+
+    @Override
+    public boolean deleteProduct(Long id) {
+        return productMapper.deleteById(id) > 0;
+    }
+
+    @Override
+    public Product searchProductById(Long id) {
+        // Query the product based on ID and ensure it's not logically deleted
+        return productMapper.selectById(id);
+    }
+
+    @Override
+    public boolean updateProduct(Product product) {
+        // Check if the product exists and is not logically deleted
+        Product existingProduct = productMapper.selectByIdAndNotDeleted(product.getId());
+        if (existingProduct == null) {
+            return false; // Product does not exist or has been deleted
+        }
+        // Update fields and set the updated time
+        product.setUpdateTime(new Date());
+        return productMapper.updateById(product) > 0;
     }
 }
 

@@ -2,6 +2,7 @@ package edu.whut.mapper;
 
 import edu.whut.pojo.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
 * @author wunder
@@ -10,7 +11,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity edu.whut.pojo.Product
 */
 public interface ProductMapper extends BaseMapper<Product> {
-
+    @Select("SELECT * FROM product WHERE id = #{id} AND is_deleted = 0")
+    Product selectByIdAndNotDeleted(Long id);
 }
 
 
