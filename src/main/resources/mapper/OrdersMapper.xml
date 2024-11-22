@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.whut.mapper.OrdersMapper">
+
+    <resultMap id="BaseResultMap" type="edu.whut.pojo.Orders">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="version" column="version" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_number,is_deleted,
+        version,create_time,update_time
+    </sql>
+
+    <resultMap id="OrdersVOMap" type="edu.whut.vo.OrdersVO">
+        <id property="id" column="order_id" />
+        <result property="orderNumber" column="order_number" />
+        <result property="name" column="user_name" />
+        <result property="gender" column="gender" />
+        <result property="phone" column="phone" />
+        <result property="address" column="address" />
+        <result property="productName" column="product_name" />
+        <result property="status" column="status" />
+        <result property="orderTime" column="order_time" />
+        <result property="price" column="total_price" />
+    </resultMap>
+
+    <select id="getOrderList" resultMap="OrdersVOMap">
+        SELECT
+        o.id AS order_id,
+        o.order_number,
+        u.real_name AS user_name,
+        u.gender,
+        u.phone,
+        u.address,
+        p.name AS product_name,
+        d.status,
+        d.order_time,
+        d.total_price
+        FROM
+        orders o
+        INNER JOIN
+        order_details d ON o.id = d.order_id
+        INNER JOIN
+        user u ON d.user_id = u.id
+        INNER JOIN
+        product p ON d.product_id = p.id
+        WHERE
+        o.is_deleted = 0
+        AND d.is_deleted = 0
+        <if test="name != null and name != ''">
+            AND u.nickname LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="gender != null and gender != ''">
+            AND u.gender = #{gender}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND u.phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="date != null and date != ''">
+            AND DATE(d.order_time) = #{date}
+        </if>
+    </select>
+
+</mapper>

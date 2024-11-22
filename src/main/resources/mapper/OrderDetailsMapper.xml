@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.whut.mapper.OrderDetailsMapper">
+
+    <resultMap id="BaseResultMap" type="edu.whut.pojo.OrderDetails">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="productId" column="product_id" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
+            <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_id,user_id,
+        product_id,status,order_time,
+        total_price,is_deleted
+    </sql>
+</mapper>
