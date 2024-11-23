@@ -17,7 +17,7 @@ public interface CheckUserService extends IService<CheckUser> {
 
     public IPage<CheckUserDTO> getCheckUserList(int page, int size, String name, String gender, String phone);
 
-    public boolean addCheckUser(CheckUserAddDTO checkUserDTO);
+    public boolean addCheckUser(CheckUserAddDTO checkUserDTO,Integer userId);
 
     public boolean deleteCheckUser(Integer id);
 

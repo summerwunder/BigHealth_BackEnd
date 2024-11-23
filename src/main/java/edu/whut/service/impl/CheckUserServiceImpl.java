@@ -9,8 +9,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.whut.dto.CheckUserAddDTO;
 import edu.whut.dto.CheckUserDTO;
 import edu.whut.mapper.RecordsMapper;
+import edu.whut.mapper.UserCheckUserMapper;
 import edu.whut.pojo.CheckUser;
 import edu.whut.pojo.User;
+import edu.whut.pojo.UserCheckUser;
 import edu.whut.service.CheckUserService;
 import edu.whut.mapper.CheckUserMapper;
 import edu.whut.vo.RecordDetailsVO;
@@ -39,6 +41,9 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
 
     @Autowired
     private RecordsMapper recordsMapper;
+
+    @Autowired
+    private UserCheckUserMapper userCheckUserMapper;
     @Override
     public IPage<CheckUserDTO> getCheckUserList(int page, int size, String name, String gender, String phone){
         IPage<CheckUser> checkUserPage=new Page<>(page,size);
@@ -97,12 +102,23 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
      * @param checkUserDTO 前端传递的 DTO
      * @return 是否新增成功
      */
-    public boolean addCheckUser(CheckUserAddDTO checkUserDTO) {
+    public boolean addCheckUser(CheckUserAddDTO checkUserDTO,Integer userId) {
         CheckUser checkUser = new CheckUser();
         BeanUtils.copyProperties(checkUserDTO, checkUser); // DTO 转实体类
         checkUser.setCreateTime(new Date());
         checkUser.setUpdateTime(new Date());
-        return checkUserMapper.insert(checkUser) > 0;
+        int inserted = checkUserMapper.insert(checkUser);
+        if(inserted < 0){
+            return false;
+        }
+        // 获取生成的主键 ID（MyBatis 会将生成的 ID 设置到实体类的主键字段中）
+        Integer checkUserId = checkUser.getId();
+        UserCheckUser userCheckUser = new UserCheckUser();
+        userCheckUser.setCheckUserId(Long.valueOf(checkUserId));
+        userCheckUser.setUserId(Long.valueOf(userId));
+
+        userCheckUserMapper.insert(userCheckUser);
+        return inserted > 0;
     }
 
     public boolean deleteCheckUser(Integer id) {
@@ -136,7 +152,6 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
 
         // Fetch associated records
         List<RecordDetailsVO> details = recordsMapper.fetchDetailsByCheckUserId(id);
-
         // Calculate total records
         int total = details.size();
 

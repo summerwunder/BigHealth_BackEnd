@@ -43,9 +43,9 @@ public class CheckUserController {
      * @param checkUserDTO 前端传递的数据
      * @return 操作结果
      */
-    @PostMapping("/add")
-    public Result addCheckUser(@RequestBody CheckUserAddDTO checkUserDTO) {
-        boolean success = checkUserService.addCheckUser(checkUserDTO);
+    @PostMapping("/add/{id}")
+    public Result addCheckUser(@PathVariable int id,@RequestBody CheckUserAddDTO checkUserDTO ) {
+        boolean success = checkUserService.addCheckUser(checkUserDTO,id);
         if (success) {
             return Result.success("新增成功");
         } else {
