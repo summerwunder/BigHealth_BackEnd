@@ -2,8 +2,10 @@ package edu.whut.mapper;
 
 import edu.whut.pojo.Records;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import edu.whut.vo.RecordDetailsVO;
 import edu.whut.vo.RecordVO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,11 @@ public interface RecordsMapper extends BaseMapper<Records> {
                                 @Param("offset") int offset);
 
     long countRecords(String name, String gender, String phone, String date);
+
+    List<RecordDetailsVO> fetchDetailsByCheckUserId(@Param("id") Long id);
+
+    @Select("SELECT COUNT(*) FROM records WHERE check_user_id = #{checkUserId} AND is_deleted = 0")
+    Integer countByCheckUserId(@Param("checkUserId") Integer checkUserId);
 }
 
 

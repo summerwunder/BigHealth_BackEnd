@@ -9,6 +9,8 @@ import edu.whut.service.CheckUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/checkUser")
 public class CheckUserController {
@@ -72,5 +74,11 @@ public class CheckUserController {
         } catch (Exception e) {
             return Result.error("更新失败: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/details/{id}")
+    public Result getCheckUserDetails(@PathVariable Long id) {
+        Map<String, Object> data = checkUserService.getCheckUserDetails(id);
+        return Result.success(data);
     }
 }

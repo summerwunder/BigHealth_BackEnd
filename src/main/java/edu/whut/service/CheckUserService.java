@@ -6,6 +6,8 @@ import edu.whut.dto.CheckUserDTO;
 import edu.whut.pojo.CheckUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
 * @author wunder
 * @description 针对表【check_user(体检人信息表)】的数据库操作Service
@@ -20,4 +22,6 @@ public interface CheckUserService extends IService<CheckUser> {
     public boolean deleteCheckUser(Integer id);
 
     public boolean updateCheckUser(CheckUserAddDTO user, Integer id);
+
+    Map<String, Object> getCheckUserDetails(Long id);
 }

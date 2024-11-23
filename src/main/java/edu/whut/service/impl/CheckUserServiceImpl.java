@@ -8,16 +8,21 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.whut.dto.CheckUserAddDTO;
 import edu.whut.dto.CheckUserDTO;
+import edu.whut.mapper.RecordsMapper;
 import edu.whut.pojo.CheckUser;
 import edu.whut.pojo.User;
 import edu.whut.service.CheckUserService;
 import edu.whut.mapper.CheckUserMapper;
+import edu.whut.vo.RecordDetailsVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -32,6 +37,8 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
     @Autowired
     private CheckUserMapper checkUserMapper;
 
+    @Autowired
+    private RecordsMapper recordsMapper;
     @Override
     public IPage<CheckUserDTO> getCheckUserList(int page, int size, String name, String gender, String phone){
         IPage<CheckUser> checkUserPage=new Page<>(page,size);
@@ -55,10 +62,16 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
         dtoPage.setCurrent(userPage.getCurrent());
         dtoPage.setSize(userPage.getSize());
         dtoPage.setTotal(userPage.getTotal());
-        dtoPage.setRecords(
-                userPage.getRecords().stream().map(this::convertToDTO).collect(Collectors.toList())
-        );
 
+        List<CheckUserDTO> dtoList = userPage.getRecords().stream().map(user -> {
+            CheckUserDTO dto = convertToDTO(user);
+            // 查询该用户的预约次数
+            Integer checkCount = recordsMapper.countByCheckUserId(user.getId());
+            dto.setCheckCount(checkCount != null ? checkCount : 0);
+            return dto;
+        }).collect(Collectors.toList());
+
+        dtoPage.setRecords(dtoList);
         return dtoPage;
     }
 
@@ -115,6 +128,25 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
             return checkUserMapper.updateById(checkUser) > 0;
         }
         return false;
+    }
+
+    @Override
+    public Map<String, Object> getCheckUserDetails(Long id) {
+        CheckUser userInfo = checkUserMapper.selectById(id);
+
+        // Fetch associated records
+        List<RecordDetailsVO> details = recordsMapper.fetchDetailsByCheckUserId(id);
+
+        // Calculate total records
+        int total = details.size();
+
+        // Prepare result
+        Map<String, Object> result = new HashMap<>();
+        result.put("userInfo", userInfo);
+        result.put("details", details);
+        result.put("total", total);
+
+        return result;
     }
 }
 

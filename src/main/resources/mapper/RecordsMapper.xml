@@ -77,4 +77,16 @@
             AND DATE(r.appointment_time) = DATE(#{date})
         </if>
     </select>
+
+    <select id="fetchDetailsByCheckUserId" resultType="edu.whut.vo.RecordDetailsVO">
+        SELECT
+            r.product_id AS productId,
+            p.type AS productName,
+            r.appointment_time AS time,
+            p.name AS checkItem,
+        '美年武昌分院' AS store
+        FROM records r
+            JOIN product p ON r.product_id = p.id
+        WHERE r.check_user_id = #{id}
+    </select>
 </mapper>
