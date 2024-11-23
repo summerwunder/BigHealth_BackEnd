@@ -3,11 +3,18 @@ package edu.whut.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.whut.mapper.ProductMapper;
 import edu.whut.pojo.OrderDetails;
+import edu.whut.pojo.Product;
 import edu.whut.service.OrderDetailsService;
 import edu.whut.mapper.OrderDetailsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author wunder
@@ -20,6 +27,8 @@ public class OrderDetailsServiceImpl extends ServiceImpl<OrderDetailsMapper, Ord
 
     @Autowired
     private OrderDetailsMapper orderDetailsMapper;
+    @Autowired
+    private ProductMapper productMapper;
     @Override
     public Boolean approveRefund(Integer orderId) {
         LambdaQueryWrapper<OrderDetails> wrapper = new LambdaQueryWrapper<>();
@@ -32,6 +41,28 @@ public class OrderDetailsServiceImpl extends ServiceImpl<OrderDetailsMapper, Ord
             orderDetailsMapper.updateById(orderDetails);
             return true;
         }
+    }
+
+    @Override
+    public List<Product> getUnusedProducts(Long userId) {
+        LambdaQueryWrapper<OrderDetails> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(OrderDetails::getUserId, userId);
+        wrapper.eq(OrderDetails::getIsUsed,0);
+        wrapper.eq(OrderDetails::getStatus,"已支付");
+        List<OrderDetails> orderDetailsList = orderDetailsMapper.selectList(wrapper);
+        List<Integer> productIds = orderDetailsList.stream()
+                .map(OrderDetails::getProductId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        // If no products found, return an empty list
+        if (productIds.isEmpty()) {
+            return Collections.emptyList();
+        }
+        // Query product details based on the extracted product IDs
+        LambdaQueryWrapper<Product> productWrapper = new LambdaQueryWrapper<>();
+        productWrapper.in(Product::getId, productIds);
+        return productMapper.selectList(productWrapper);
     }
 }
 

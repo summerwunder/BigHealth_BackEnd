@@ -9,10 +9,7 @@ import edu.whut.service.RecordsService;
 import edu.whut.vo.RecordVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -49,6 +46,16 @@ public class RecordsController {
             return Result.success("预约状态已更新为已到店");
         } else {
             return Result.error("更新预约状态失败");
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public Result deleteRecord(@RequestParam Long id) {
+        boolean removed = recordService.removeById(id); // Remove by ID
+        if (removed) {
+            return Result.success();
+        } else {
+            return Result.error("删除失败");
         }
     }
 }

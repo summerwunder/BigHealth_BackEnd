@@ -2,6 +2,9 @@ package edu.whut.service;
 
 import edu.whut.pojo.OrderDetails;
 import com.baomidou.mybatisplus.extension.service.IService;
+import edu.whut.pojo.Product;
+
+import java.util.List;
 
 /**
 * @author wunder
@@ -11,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface OrderDetailsService extends IService<OrderDetails> {
 
     Boolean approveRefund(Integer orderId);
+
+    List<Product> getUnusedProducts(Long userId);
 }

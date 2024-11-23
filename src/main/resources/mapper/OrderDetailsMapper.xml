@@ -13,11 +13,12 @@
             <result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
             <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
             <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="isUsed" column="is_used" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,order_id,user_id,
         product_id,status,order_time,
-        total_price,is_deleted
+        total_price,is_deleted,is_used
     </sql>
 </mapper>

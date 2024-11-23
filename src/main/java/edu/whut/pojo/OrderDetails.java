@@ -64,6 +64,9 @@ public class OrderDetails implements Serializable {
     @TableField(value = "is_deleted")
     private Integer isDeleted;
 
+    @TableField(value = "is_used")
+    private Integer isUsed;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }
