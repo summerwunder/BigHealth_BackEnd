@@ -2,11 +2,9 @@ package edu.whut.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
-import edu.whut.dto.UserDTO;
-import edu.whut.mapper.UserMapper;
-import edu.whut.pojo.User;
+import edu.whut.domain.dto.UserDTO;
+import edu.whut.domain.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
 * @author wunder

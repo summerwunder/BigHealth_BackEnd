@@ -1,7 +1,7 @@
 package edu.whut.controller;
 
-import edu.whut.dto.ProductDTO;
-import edu.whut.pojo.Product;
+import edu.whut.domain.dto.ProductDTO;
+import edu.whut.domain.pojo.Product;
 import edu.whut.response.Result;
 import edu.whut.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

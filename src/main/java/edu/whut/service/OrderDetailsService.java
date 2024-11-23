@@ -1,8 +1,8 @@
 package edu.whut.service;
 
-import edu.whut.pojo.OrderDetails;
+import edu.whut.domain.pojo.OrderDetails;
 import com.baomidou.mybatisplus.extension.service.IService;
-import edu.whut.pojo.Product;
+import edu.whut.domain.pojo.Product;
 
 import java.util.List;
 

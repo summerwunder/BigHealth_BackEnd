@@ -1,18 +1,14 @@
 package edu.whut.controller;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import edu.whut.dto.RecordAddDTO;
-import edu.whut.pojo.Records;
+import edu.whut.domain.dto.RecordAddDTO;
+import edu.whut.domain.pojo.Records;
 import edu.whut.response.PageResult;
 import edu.whut.response.Result;
 import edu.whut.service.RecordsService;
-import edu.whut.vo.RecordVO;
+import edu.whut.domain.vo.RecordVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping("/record")

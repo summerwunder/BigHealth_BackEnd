@@ -1,4 +1,4 @@
-package edu.whut.dto;
+package edu.whut.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.whut.mapper.RecordsMapper">
 
-    <resultMap id="BaseResultMap" type="edu.whut.pojo.Records">
+    <resultMap id="BaseResultMap" type="edu.whut.domain.pojo.Records">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="checkUserId" column="check_user_id" jdbcType="BIGINT"/>
             <result property="productId" column="product_id" jdbcType="BIGINT"/>
@@ -23,7 +23,7 @@
     </sql>
 
     <!-- 查询预约记录（多表联查） -->
-    <select id="queryRecords" resultType="edu.whut.vo.RecordVO">
+    <select id="queryRecords" resultType="edu.whut.domain.vo.RecordVO">
         SELECT
         r.id,
         cu.name AS name,
@@ -78,7 +78,7 @@
         </if>
     </select>
 
-    <select id="fetchDetailsByCheckUserId" resultType="edu.whut.vo.RecordDetailsVO">
+    <select id="fetchDetailsByCheckUserId" resultType="edu.whut.domain.vo.RecordDetailsVO">
         SELECT
             r.product_id AS productId,
             p.type AS productName,

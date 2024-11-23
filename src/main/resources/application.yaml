@@ -13,6 +13,10 @@ spring:
       username: root  #开发环境
       password: 123456wmr
       driver-class-name: com.mysql.cj.jdbc.Driver
+    # 配置静态资源访问，允许通过 URL 访问上传的图片
+  web:
+    resources:
+      static-locations: /Users/wunder/file:upload-files/
 
 # mybatis-plus的配置
 mybatis-plus:
@@ -23,4 +27,8 @@ mybatis-plus:
       logic-delete-field: isDeleted  #全局逻辑删除
       id-type: auto #主键策略自增长
 
-  #pagehelper分页插件配置
+# 文件上传的保存目录，确保项目根目录下有 `upload-files` 文件夹
+upload:
+  directory: /Users/wunder/upload-files
+
+

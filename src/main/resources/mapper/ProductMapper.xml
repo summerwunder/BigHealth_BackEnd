@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.whut.mapper.ProductMapper">
 
-    <resultMap id="BaseResultMap" type="edu.whut.pojo.Product">
+    <resultMap id="BaseResultMap" type="edu.whut.domain.pojo.Product">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
             <result property="price" column="price" jdbcType="DECIMAL"/>

@@ -4,14 +4,13 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.whut.mapper.ProductMapper;
-import edu.whut.pojo.OrderDetails;
-import edu.whut.pojo.Product;
+import edu.whut.domain.pojo.OrderDetails;
+import edu.whut.domain.pojo.Product;
 import edu.whut.service.OrderDetailsService;
 import edu.whut.mapper.OrderDetailsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

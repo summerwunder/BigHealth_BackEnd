@@ -1,13 +1,12 @@
 package edu.whut.mapper;
 
-import edu.whut.pojo.Records;
+import edu.whut.domain.pojo.Records;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import edu.whut.vo.RecordDetailsVO;
-import edu.whut.vo.RecordVO;
+import edu.whut.domain.vo.RecordDetailsVO;
+import edu.whut.domain.vo.RecordVO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.Date;
 import java.util.List;
 
 /**

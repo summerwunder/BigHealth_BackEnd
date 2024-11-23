@@ -1,4 +1,4 @@
-package edu.whut.pojo;
+package edu.whut.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

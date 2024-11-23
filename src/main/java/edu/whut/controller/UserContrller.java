@@ -1,8 +1,7 @@
 package edu.whut.controller;
 
 
-import edu.whut.dto.UserDTO;
-import edu.whut.pojo.User;
+import edu.whut.domain.dto.UserDTO;
 import edu.whut.response.Result;
 import edu.whut.service.UserService;
 import lombok.extern.slf4j.Slf4j;

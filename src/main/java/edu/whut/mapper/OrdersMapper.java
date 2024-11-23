@@ -1,9 +1,9 @@
 package edu.whut.mapper;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import edu.whut.pojo.Orders;
+import edu.whut.domain.pojo.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import edu.whut.vo.OrdersVO;
+import edu.whut.domain.vo.OrdersVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

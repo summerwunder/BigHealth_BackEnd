@@ -5,14 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import edu.whut.dto.ProductDTO;
-import edu.whut.pojo.Product;
-import edu.whut.pojo.User;
+import edu.whut.domain.dto.ProductDTO;
+import edu.whut.domain.pojo.Product;
 import edu.whut.service.ProductService;
 import edu.whut.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 

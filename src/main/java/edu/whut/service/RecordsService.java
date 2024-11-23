@@ -1,12 +1,10 @@
 package edu.whut.service;
 
-import edu.whut.dto.RecordAddDTO;
-import edu.whut.pojo.Records;
+import edu.whut.domain.dto.RecordAddDTO;
+import edu.whut.domain.pojo.Records;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.whut.response.PageResult;
-import edu.whut.vo.RecordVO;
-
-import java.util.Date;
+import edu.whut.domain.vo.RecordVO;
 
 /**
 * @author wunder

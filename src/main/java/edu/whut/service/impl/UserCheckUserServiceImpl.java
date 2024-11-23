@@ -2,7 +2,7 @@ package edu.whut.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import edu.whut.pojo.UserCheckUser;
+import edu.whut.domain.pojo.UserCheckUser;
 import edu.whut.service.UserCheckUserService;
 import edu.whut.mapper.UserCheckUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;

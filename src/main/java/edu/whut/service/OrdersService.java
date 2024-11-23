@@ -1,10 +1,9 @@
 package edu.whut.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import edu.whut.pojo.Orders;
+import edu.whut.domain.pojo.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.whut.response.PageResult;
-import edu.whut.vo.OrdersVO;
+import edu.whut.domain.vo.OrdersVO;
 
 /**
 * @author wunder

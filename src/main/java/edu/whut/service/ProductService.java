@@ -1,8 +1,8 @@
 package edu.whut.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import edu.whut.dto.ProductDTO;
-import edu.whut.pojo.Product;
+import edu.whut.domain.dto.ProductDTO;
+import edu.whut.domain.pojo.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

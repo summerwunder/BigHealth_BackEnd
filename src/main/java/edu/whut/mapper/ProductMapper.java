@@ -1,6 +1,6 @@
 package edu.whut.mapper;
 
-import edu.whut.pojo.Product;
+import edu.whut.domain.pojo.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 

@@ -1,4 +1,4 @@
-package edu.whut.dto;
+package edu.whut.domain.dto;
 
 import lombok.Data;
 

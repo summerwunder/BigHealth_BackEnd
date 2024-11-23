@@ -1,4 +1,4 @@
-package edu.whut.pojo;
+package edu.whut.domain.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,29 +9,41 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 用户与体检人对应关系表
- * @TableName user_check_user
+ * 预约记录表
+ * @TableName records
  */
-@TableName(value ="user_check_user")
+@TableName(value ="records")
 @Data
-public class UserCheckUser implements Serializable {
+public class Records implements Serializable {
     /**
-     * 主键 ID
+     * 预约记录主键 ID
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
-
-    /**
-     * 用户 ID，关联 user 表
-     */
-    @TableField(value = "user_id")
-    private Long userId;
 
     /**
      * 体检人 ID，关联 check_user 表
      */
     @TableField(value = "check_user_id")
     private Long checkUserId;
+
+    /**
+     * 商品 ID，关联 product 表
+     */
+    @TableField(value = "product_id")
+    private Long productId;
+
+    /**
+     * 预约时间
+     */
+    @TableField(value = "appointment_time")
+    private Date appointmentTime;
+
+    /**
+     * 预约状态，如已预约、已取消
+     */
+    @TableField(value = "status")
+    private String status;
 
     /**
      * 记录创建时间
@@ -50,6 +62,12 @@ public class UserCheckUser implements Serializable {
      */
     @TableField(value = "is_deleted")
     private Integer isDeleted;
+
+    /**
+     * 乐观锁版本号
+     */
+    @TableField(value = "version")
+    private Integer version;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

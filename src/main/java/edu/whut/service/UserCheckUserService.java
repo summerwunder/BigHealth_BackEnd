@@ -1,6 +1,6 @@
 package edu.whut.service;
 
-import edu.whut.pojo.UserCheckUser;
+import edu.whut.domain.pojo.UserCheckUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

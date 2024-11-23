@@ -1,4 +1,4 @@
-package edu.whut.vo;
+package edu.whut.domain.vo;
 
 import lombok.Data;
 

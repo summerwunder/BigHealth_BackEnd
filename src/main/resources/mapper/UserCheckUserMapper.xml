@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.whut.mapper.UserCheckUserMapper">
 
-    <resultMap id="BaseResultMap" type="edu.whut.pojo.UserCheckUser">
+    <resultMap id="BaseResultMap" type="edu.whut.domain.pojo.UserCheckUser">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="checkUserId" column="check_user_id" jdbcType="BIGINT"/>

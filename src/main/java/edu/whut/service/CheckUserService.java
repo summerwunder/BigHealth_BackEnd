@@ -1,9 +1,9 @@
 package edu.whut.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import edu.whut.dto.CheckUserAddDTO;
-import edu.whut.dto.CheckUserDTO;
-import edu.whut.pojo.CheckUser;
+import edu.whut.domain.dto.CheckUserAddDTO;
+import edu.whut.domain.dto.CheckUserDTO;
+import edu.whut.domain.pojo.CheckUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Map;

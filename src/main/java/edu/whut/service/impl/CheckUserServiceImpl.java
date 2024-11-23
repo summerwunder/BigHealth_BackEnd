@@ -1,21 +1,19 @@
 package edu.whut.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import edu.whut.dto.CheckUserAddDTO;
-import edu.whut.dto.CheckUserDTO;
+import edu.whut.domain.dto.CheckUserAddDTO;
+import edu.whut.domain.dto.CheckUserDTO;
 import edu.whut.mapper.RecordsMapper;
 import edu.whut.mapper.UserCheckUserMapper;
-import edu.whut.pojo.CheckUser;
-import edu.whut.pojo.User;
-import edu.whut.pojo.UserCheckUser;
+import edu.whut.domain.pojo.CheckUser;
+import edu.whut.domain.pojo.UserCheckUser;
 import edu.whut.service.CheckUserService;
 import edu.whut.mapper.CheckUserMapper;
-import edu.whut.vo.RecordDetailsVO;
+import edu.whut.domain.vo.RecordDetailsVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

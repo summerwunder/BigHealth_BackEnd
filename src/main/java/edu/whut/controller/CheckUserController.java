@@ -1,9 +1,8 @@
 package edu.whut.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import edu.whut.dto.CheckUserAddDTO;
-import edu.whut.dto.CheckUserDTO;
-import edu.whut.dto.UserDTO;
+import edu.whut.domain.dto.CheckUserAddDTO;
+import edu.whut.domain.dto.CheckUserDTO;
 import edu.whut.response.Result;
 import edu.whut.service.CheckUserService;
 import edu.whut.service.UserCheckUserService;

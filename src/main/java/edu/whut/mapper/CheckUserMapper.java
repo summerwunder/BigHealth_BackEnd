@@ -1,6 +1,6 @@
 package edu.whut.mapper;
 
-import edu.whut.pojo.CheckUser;
+import edu.whut.domain.pojo.CheckUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
