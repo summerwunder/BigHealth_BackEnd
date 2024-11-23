@@ -2,6 +2,7 @@ package edu.whut.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import edu.whut.dto.RecordAddDTO;
 import edu.whut.pojo.Records;
 import edu.whut.response.PageResult;
 import edu.whut.response.Result;
@@ -46,6 +47,15 @@ public class RecordsController {
             return Result.success("预约状态已更新为已到店");
         } else {
             return Result.error("更新预约状态失败");
+        }
+    }
+    @PostMapping("/add")
+    public Result addRecord(@RequestBody RecordAddDTO recordAddDTO) {
+        boolean success = recordService.addRecord(recordAddDTO);
+        if (success) {
+            return Result.success("预约记录创建成功");
+        } else {
+            return Result.error("预约记录创建失败");
         }
     }
 

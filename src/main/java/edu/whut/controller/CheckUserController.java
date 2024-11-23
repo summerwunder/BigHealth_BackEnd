@@ -6,6 +6,7 @@ import edu.whut.dto.CheckUserDTO;
 import edu.whut.dto.UserDTO;
 import edu.whut.response.Result;
 import edu.whut.service.CheckUserService;
+import edu.whut.service.UserCheckUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,9 @@ import java.util.Map;
 public class CheckUserController {
     @Autowired
     private CheckUserService checkUserService;
+
+    @Autowired
+    private UserCheckUserService userCheckUserService;
 
     /**
      * 获取体检人列表
@@ -80,5 +84,15 @@ public class CheckUserController {
     public Result getCheckUserDetails(@PathVariable Long id) {
         Map<String, Object> data = checkUserService.getCheckUserDetails(id);
         return Result.success(data);
+    }
+
+    @GetMapping("/userId")
+    public Result getUserIdByCheckUserId(@RequestParam Long id) {
+        Long userId = userCheckUserService.getUserIdByCheckUserId(id);
+        if (userId != null) {
+            return Result.success(userId);
+        } else {
+            return Result.error("未找到对应的用户 ID");
+        }
     }
 }

@@ -1,5 +1,6 @@
 package edu.whut.service;
 
+import edu.whut.dto.RecordAddDTO;
 import edu.whut.pojo.Records;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.whut.response.PageResult;
@@ -15,4 +16,6 @@ import java.util.Date;
 public interface RecordsService extends IService<Records> {
 
     PageResult<RecordVO> getRecordList(String name, String gender, String phone, String date, int page, int size);
+
+    boolean addRecord(RecordAddDTO recordAddDTO);
 }
