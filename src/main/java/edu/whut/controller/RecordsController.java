@@ -2,6 +2,7 @@ package edu.whut.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import edu.whut.pojo.Records;
 import edu.whut.response.PageResult;
 import edu.whut.response.Result;
 import edu.whut.service.RecordsService;
@@ -31,6 +32,24 @@ public class RecordsController {
             @RequestParam(defaultValue = "10") int size) {
         PageResult<RecordVO> recordPage = recordService.getRecordList(name, gender, phone, date, page, size);
         return Result.success(recordPage);
+    }
+
+    @GetMapping("/arrival")
+    public Result arrivalRecords(@RequestParam Integer id){
+        // 检查预约记录是否存在
+        Records record = recordService.getById(id);
+        if (record == null) {
+            return Result.error("未找到该预约记录");
+        }
+        record.setStatus("已到店");
+        boolean updated = recordService.updateById(record);
+
+        // 返回更新结果
+        if (updated) {
+            return Result.success("预约状态已更新为已到店");
+        } else {
+            return Result.error("更新预约状态失败");
+        }
     }
 }
 
