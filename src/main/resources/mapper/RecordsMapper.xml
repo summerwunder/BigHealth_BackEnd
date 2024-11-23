@@ -21,4 +21,60 @@
         appointment_time,status,create_time,
         update_time,is_deleted,version
     </sql>
+
+    <!-- 查询预约记录（多表联查） -->
+    <select id="queryRecords" resultType="edu.whut.vo.RecordVO">
+        SELECT
+        r.id,
+        cu.name AS name,
+        cu.gender AS gender,
+        cu.phone AS phone,
+        cu.id_card AS idCard,
+        p.name AS productName,
+        r.appointment_time AS appointmentTime,
+        r.status AS status,
+        r.create_time AS createTime
+        FROM
+        records r
+        LEFT JOIN check_user cu ON r.check_user_id = cu.id
+        LEFT JOIN product p ON r.product_id = p.id
+        WHERE
+        r.is_deleted = 0
+        <if test="name != null and name != ''">
+            AND cu.name LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="gender != null and gender != ''">
+            AND cu.gender = #{gender}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND cu.phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="date != null and date != ''" >
+            AND DATE_FORMAT(r.appointment_time, '%Y-%m-%d') = #{date}
+        </if>
+        ORDER BY r.appointment_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countRecords" resultType="long">
+        SELECT COUNT(*)
+        FROM
+        records r
+        LEFT JOIN check_user cu ON r.check_user_id = cu.id
+        LEFT JOIN product p ON r.product_id = p.id
+        WHERE
+        r.is_deleted = 0
+        <if test="name != null and name != ''">
+            AND cu.name LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="gender != null and gender != ''">
+            AND cu.gender = #{gender}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND cu.phone LIKE CONCAT('%', #{phone}, '%')
+        </if>
+        <if test="date != null">
+            AND DATE(r.appointment_time) = DATE(#{date})
+        </if>
+    </select>
 </mapper>

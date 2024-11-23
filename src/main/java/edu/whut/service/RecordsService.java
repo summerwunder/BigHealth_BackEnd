@@ -2,6 +2,10 @@ package edu.whut.service;
 
 import edu.whut.pojo.Records;
 import com.baomidou.mybatisplus.extension.service.IService;
+import edu.whut.response.PageResult;
+import edu.whut.vo.RecordVO;
+
+import java.util.Date;
 
 /**
 * @author wunder
@@ -10,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface RecordsService extends IService<Records> {
 
+    PageResult<RecordVO> getRecordList(String name, String gender, String phone, String date, int page, int size);
 }
