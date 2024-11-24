@@ -20,6 +20,7 @@ public class UploadController {
     private String uploadDirectory;
 
     @PostMapping("/image")
+    @CrossOrigin(origins = "*")
     public Map<String, Object> uploadImage(@RequestParam("file") MultipartFile file) {
         Map<String, Object> response = new HashMap<>();
 
@@ -45,10 +46,10 @@ public class UploadController {
             // 保存文件
             file.transferTo(destinationFile);
 
-            // 返回响应，图片通过 `http://localhost:8080/uploads/<文件名>` 访问
+            // 返回响应，图片通过 `http://localhost:8000/uploads/<文件名>` 访问
             response.put("status", "success");
             response.put("message", "图片上传成功");
-            response.put("url", "/uploads/" + uniqueFileName);
+            response.put("url", "/upload-files/" + uniqueFileName);
         } catch (IOException e) {
             response.put("status", "error");
             response.put("message", "图片上传失败：" + e.getMessage());

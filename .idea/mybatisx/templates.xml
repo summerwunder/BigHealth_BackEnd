@@ -68,8 +68,8 @@
             <option name="tableUIInfoList">
               <list>
                 <TableUIInfo>
-                  <option name="className" value="UserCheckUser" />
-                  <option name="tableName" value="user_check_user" />
+                  <option name="className" value="Banner" />
+                  <option name="tableName" value="banner" />
                 </TableUIInfo>
               </list>
             </option>
