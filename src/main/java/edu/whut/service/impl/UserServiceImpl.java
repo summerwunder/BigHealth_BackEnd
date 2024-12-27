@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.whut.domain.dto.LoginUserDTO;
 import edu.whut.domain.dto.UserDTO;
 import edu.whut.domain.pojo.User;
 import edu.whut.service.UserService;
@@ -82,6 +83,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 设置更新时间
         existingUser.setUpdateTime(LocalDateTime.now());
         return userMapper.updateById(existingUser) > 0; // 返回更新结果
+    }
+
+    @Override
+    public User getUserInfo(LoginUserDTO userLoginDTO) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getNickname,userLoginDTO.getUsername());
+        queryWrapper.eq(User::getPhone,userLoginDTO.getPhone());
+        return userMapper.selectOne(queryWrapper);
     }
 }
 

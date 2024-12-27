@@ -6,6 +6,7 @@ import edu.whut.domain.dto.CheckUserDTO;
 import edu.whut.domain.pojo.CheckUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,4 +25,6 @@ public interface CheckUserService extends IService<CheckUser> {
     public boolean updateCheckUser(CheckUserAddDTO user, Integer id);
 
     Map<String, Object> getCheckUserDetails(Long id);
+
+    List<CheckUser> getCheckUsersByUserId(Long userId);
 }

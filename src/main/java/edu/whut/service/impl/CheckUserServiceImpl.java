@@ -161,6 +161,29 @@ public class CheckUserServiceImpl extends ServiceImpl<CheckUserMapper, CheckUser
 
         return result;
     }
+
+    @Override
+    public List<CheckUser> getCheckUsersByUserId(Long userId) {
+        // Step 1: 查询 user_check_user 表中所有关联体检人ID
+        LambdaQueryWrapper<UserCheckUser> userCheckUserQuery = new LambdaQueryWrapper<>();
+        userCheckUserQuery.eq(UserCheckUser::getUserId, userId)
+                .eq(UserCheckUser::getIsDeleted, 0); // 逻辑未删除
+        List<Long> checkUserIds = userCheckUserMapper.selectList(userCheckUserQuery)
+                .stream()
+                .map(UserCheckUser::getCheckUserId)
+                .collect(Collectors.toList());
+
+        if (checkUserIds.isEmpty()) {
+            return List.of(); // 无关联体检人，返回空列表
+        }
+
+        // Step 2: 查询 check_user 表中的体检人详细信息
+        LambdaQueryWrapper<CheckUser> checkUserQuery = new LambdaQueryWrapper<>();
+        checkUserQuery.in(CheckUser::getId, checkUserIds)
+                .eq(CheckUser::getIsDeleted, 0); // 逻辑未删除
+        return checkUserMapper.selectList(checkUserQuery);
+    }
+
 }
 
 
