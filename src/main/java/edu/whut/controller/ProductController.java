@@ -64,4 +64,20 @@ public class ProductController {
             return Result.error("商品更新失败或商品不存在！");
         }
     }
+
+    /**
+     * 根据商品ID获取商品详情
+     *
+     * @param id 商品ID
+     * @return 商品详情
+     */
+    @GetMapping("/{id}")
+    public Result getProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        if (product != null) {
+            return Result.success(product);
+        } else {
+            return Result.error("商品不存在或已下架");
+        }
+    }
 }

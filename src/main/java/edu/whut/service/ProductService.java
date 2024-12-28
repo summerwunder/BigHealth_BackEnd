@@ -21,4 +21,6 @@ public interface ProductService extends IService<Product> {
     Product searchProductById(Long id);
 
     boolean updateProduct(Product product);
+
+    Product getProductById(Long id);
 }

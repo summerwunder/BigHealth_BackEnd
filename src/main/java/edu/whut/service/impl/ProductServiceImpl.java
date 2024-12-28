@@ -82,6 +82,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product>
         product.setUpdateTime(new Date());
         return productMapper.updateById(product) > 0;
     }
+
+    @Override
+    public Product getProductById(Long id) {
+        return productMapper.selectById(id);
+    }
 }
 
 
