@@ -1,14 +1,12 @@
 package edu.whut.controller;
 
 
+import edu.whut.domain.dto.UpdateStatusDTO;
 import edu.whut.domain.pojo.Product;
 import edu.whut.response.Result;
 import edu.whut.service.OrderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +30,16 @@ public class OrderDetailsController {
     public Result getUnusedProducts(@RequestParam Long id) {
         List<Product> unusedProducts = orderDetailsService.getUnusedProducts(id);
         return Result.success(unusedProducts);
+    }
+
+
+    @PutMapping("/updateStatus")
+    public Result updateOrderStatus(@RequestBody UpdateStatusDTO updateStatusDTO) {
+        boolean isUpdated = orderDetailsService.updateOrderStatus(updateStatusDTO);
+        if (isUpdated) {
+            return Result.success("订单状态更新成功");
+        } else {
+            return Result.error("订单状态更新失败");
+        }
     }
 }

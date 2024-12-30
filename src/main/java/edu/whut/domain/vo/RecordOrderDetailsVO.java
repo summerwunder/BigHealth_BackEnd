@@ -10,6 +10,7 @@ public class RecordOrderDetailsVO {
     private Long id; // 订单ID
     private String orderNumber; // 订单编号
     private String status; // 订单状态
+    private Long productId;
     private String productName; // 商品名称
     private String productDescription;
     private BigDecimal price; // 订单价格

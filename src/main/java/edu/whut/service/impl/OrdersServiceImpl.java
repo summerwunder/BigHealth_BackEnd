@@ -106,8 +106,8 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         }else if("已完成".equals(status)){
             queryWrapper.eq(OrderDetails::getStatus,"已支付");
             queryWrapper.eq(OrderDetails::getIsUsed,1);
-        }else if("退款/售后".equals(status)){
-            queryWrapper.eq(OrderDetails::getStatus,"退款成功");
+        }else if ("退款/售后".equals(status)) {
+            queryWrapper.in(OrderDetails::getStatus, "退款成功", "申请退款");
         }else{
             // 已完成
             queryWrapper.eq(OrderDetails::getStatus,"已支付");
@@ -133,8 +133,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
             vo.setAddress(user.getAddress());
             vo.setId(orders.getId());
             String status =null;
-            if ("退款成功".equals(orderDetails.getStatus()))
-                status = "退款/售后";
+            if ("退款成功".equals(orderDetails.getStatus())||
+                    "申请退款".equals(orderDetails.getStatus()))
+                status =orderDetails.getStatus();
             else if("已支付".equals(orderDetails.getStatus())&& orderDetails.getIsUsed() == 0)
                 status = "待预约";
             else
@@ -144,6 +145,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
             // 从 productMapper 获取商品信息
             Product product = productMapper.selectById(orderDetails.getProductId());
             vo.setProductName(product.getName());
+            vo.setProductId(product.getId());
             vo.setProductDescription(product.getDescription());
             // 从 recordsMapper 获取预约信息
             vo.setAppointmentTime(DateTime.now());

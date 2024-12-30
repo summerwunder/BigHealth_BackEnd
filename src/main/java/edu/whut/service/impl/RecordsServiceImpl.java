@@ -4,9 +4,11 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import edu.whut.domain.dto.RecordAddDTO;
+import edu.whut.domain.pojo.UserCheckUser;
 import edu.whut.mapper.OrderDetailsMapper;
 import edu.whut.domain.pojo.OrderDetails;
 import edu.whut.domain.pojo.Records;
+import edu.whut.mapper.UserCheckUserMapper;
 import edu.whut.response.PageResult;
 import edu.whut.service.RecordsService;
 import edu.whut.mapper.RecordsMapper;
@@ -33,6 +35,9 @@ public class RecordsServiceImpl extends ServiceImpl<RecordsMapper, Records>
 
     @Autowired
     private OrderDetailsMapper orderDetailsMapper;
+
+    @Autowired
+    private UserCheckUserMapper userCheckUserMapper;
     @Override
     public PageResult<RecordVO> getRecordList(String name, String gender, String phone, String date, int page, int size) {
         int offset = (page - 1) * size;
@@ -53,7 +58,12 @@ public class RecordsServiceImpl extends ServiceImpl<RecordsMapper, Records>
     public boolean addRecord(RecordAddDTO recordAddDTO) {
         // Step 1: 校验订单详情记录是否存在并未被使用
         LambdaQueryWrapper<OrderDetails> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(OrderDetails::getUserId, recordAddDTO.getCheckUserId());
+        // 获取用户
+        LambdaQueryWrapper<UserCheckUser> userCheckUserLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        userCheckUserLambdaQueryWrapper.eq(UserCheckUser::getCheckUserId,recordAddDTO.getCheckUserId());
+        UserCheckUser userCheckUser = userCheckUserMapper.selectOne(userCheckUserLambdaQueryWrapper);
+
+        queryWrapper.eq(OrderDetails::getUserId, userCheckUser.getUserId());
         queryWrapper.eq(OrderDetails::getProductId, recordAddDTO.getProductId());
         queryWrapper.eq(OrderDetails::getIsUsed, 0); // 未使用
         queryWrapper.eq(OrderDetails::getStatus, "已支付"); // 已支付状态

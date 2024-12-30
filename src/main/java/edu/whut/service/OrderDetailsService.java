@@ -1,5 +1,6 @@
 package edu.whut.service;
 
+import edu.whut.domain.dto.UpdateStatusDTO;
 import edu.whut.domain.pojo.OrderDetails;
 import com.baomidou.mybatisplus.extension.service.IService;
 import edu.whut.domain.pojo.Product;
@@ -16,4 +17,6 @@ public interface OrderDetailsService extends IService<OrderDetails> {
     Boolean approveRefund(Integer orderId);
 
     List<Product> getUnusedProducts(Long userId);
+
+    boolean updateOrderStatus(UpdateStatusDTO updateStatusDTO);
 }

@@ -2,7 +2,9 @@ package edu.whut.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import edu.whut.domain.dto.UpdateStatusDTO;
 import edu.whut.mapper.ProductMapper;
 import edu.whut.domain.pojo.OrderDetails;
 import edu.whut.domain.pojo.Product;
@@ -62,6 +64,21 @@ public class OrderDetailsServiceImpl extends ServiceImpl<OrderDetailsMapper, Ord
         LambdaQueryWrapper<Product> productWrapper = new LambdaQueryWrapper<>();
         productWrapper.in(Product::getId, productIds);
         return productMapper.selectList(productWrapper);
+    }
+
+    @Override
+    /**
+     * 修改订单状态
+     *
+     * @param updateStatusDTO 包含订单详情ID和新的状态
+     * @return 是否更新成功
+     */
+    public boolean updateOrderStatus(UpdateStatusDTO updateStatusDTO) {
+        LambdaUpdateWrapper<OrderDetails> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(OrderDetails::getOrderId, updateStatusDTO.getOrderDetailsId())
+                .set(OrderDetails::getStatus, updateStatusDTO.getNewStatus());
+
+        return orderDetailsMapper.update(null, updateWrapper) > 0;
     }
 }
 
