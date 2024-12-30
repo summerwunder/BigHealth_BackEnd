@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import edu.whut.domain.pojo.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import edu.whut.domain.vo.OrdersVO;
+import edu.whut.domain.vo.RecordOrderDetailsVO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public interface OrdersMapper extends BaseMapper<Orders> {
             @Param("phone") String phone,
             @Param("date") String date
     );
+
 }
 
 

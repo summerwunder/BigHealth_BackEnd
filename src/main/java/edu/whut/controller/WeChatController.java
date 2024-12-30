@@ -4,12 +4,16 @@ package edu.whut.controller;
 import edu.whut.domain.dto.LoginUserDTO;
 import edu.whut.domain.dto.UserDTO;
 import edu.whut.domain.pojo.User;
+import edu.whut.domain.vo.RecordOrderDetailsVO;
 import edu.whut.response.Result;
 import edu.whut.service.CheckUserService;
+import edu.whut.service.OrdersService;
 import edu.whut.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -21,6 +25,9 @@ public class WeChatController {
     private UserService userService;
     @Autowired
     private CheckUserService checkUserService;
+    @Autowired
+    private OrdersService ordersService;
+
     @PostMapping("/login")
     public Result userLogin(@RequestBody LoginUserDTO userLoginDTO) {
         log.info("good");
@@ -41,4 +48,13 @@ public class WeChatController {
     public Result getCheckUsersByUserId(@RequestParam("userId") Long userId) {
         return Result.success(checkUserService.getCheckUsersByUserId(userId));
     }
+
+
+    @GetMapping("/list")
+    public Result getOrders(@RequestParam Long userId, @RequestParam String status) {
+        List<RecordOrderDetailsVO> orders;
+        orders = ordersService.getAllOrders(userId,status);
+        return Result.success(orders);
+    }
+
 }

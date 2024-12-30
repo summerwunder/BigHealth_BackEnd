@@ -33,6 +33,7 @@ public class Records implements Serializable {
     @TableField(value = "product_id")
     private Long productId;
 
+
     /**
      * 预约时间
      */
